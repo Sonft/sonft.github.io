@@ -1,5 +1,6 @@
 // Jerry's project
-
+let size = 20;
+let numberOfClicks = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -8,14 +9,19 @@ function setup() {
 }
 
 function draw() {
-  background(0)
-  //Hero
+  background(0);
   fill(255, 204, 0);
-  ellipse(mouseX, mouseY, 20);
-  // ellipse(mouseX,mouseY,30)
+  ellipse(mouseX, mouseY, size);
   writeSomething();
-  
+
 }
+//
+//
+// function mouseClicked() {
+//   // numberOfClicks += 1
+//   // if (numberOfClicks <= 1) {
+//     writeSomething();
+//   }
 
 function writeSomething() {
   textSize(32);
