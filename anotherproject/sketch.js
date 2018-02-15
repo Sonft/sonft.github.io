@@ -7,7 +7,6 @@ function setup() {
   noCursor();
   noStroke();
 }
-
 function draw() {
   background(0);
   fill(255, 204, 0);
@@ -26,9 +25,6 @@ function mouseClicked() {
 function writeSomething() {
   textSize(32);
   fill(255);
-  text("word", 10, 30);
-  fill(0, 102, 153);
-  text("word", 10, 60);
-  fill(0, 102, 153, 51);
-  text("word", 10, 90);
+  text("Well done, you've clicked ten times", 10, 90);
+
 }
