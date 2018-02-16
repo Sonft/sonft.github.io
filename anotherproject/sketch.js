@@ -7,12 +7,22 @@ function setup() {
   noCursor();
   noStroke();
 }
+
 function draw() {
   background(0);
-  fill(255, 204, 0);
+  fill(255, 20, 60, 60);
   ellipse(mouseX, mouseY, size);
-  if (numberOfClicks >= 10) {
+  if (10 <= numberOfClicks) {
     writeSomething();
+    if (30 <= numberOfClicks) {
+      background(0);
+      fill(255, 205, 0);
+      ellipse(mouseX, mouseY, size + 5);
+    }
+    if (31 <= numberOfClicks) {
+      starlight();
+    }
+
   }
 }
 
@@ -25,6 +35,15 @@ function mouseClicked() {
 function writeSomething() {
   textSize(32);
   fill(255);
-  text("Well done, you've clicked ten times", 10, 90);
+  text("This is the birth of a star", 10, 90);
+}
 
+function starlight() {
+  textSize(32);
+  fill(255);
+  text("Our star has grown", 10, 90);
+}
+
+function astroids() {
+  
 }
