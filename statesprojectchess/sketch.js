@@ -2,6 +2,7 @@ let squares;
 let blackWhite;
 let inPlay;
 let piecePositionX, piecePositionY;
+let turns;
 
 function setup() {
   piecePositionX = 50;
@@ -12,14 +13,19 @@ function setup() {
   else {
     createCanvas(windowHeight, windowHeight);
   }
+  turns === 1;
+  inPlay = false;
   squares = width / 8;
   blackWhite = false;
+  background(255);
+  drawBoard(); //This is the chessboard code that we got shown in class
+  // defaultPositions();
 }
 
 function draw() {
-  background(255);
-  drawBoard(); //This is the chessboard code that we got shown in class
-  defaultPositions();
+  eachSquare();
+
+
 }
 
 function defaultPositions() {
@@ -27,16 +33,28 @@ function defaultPositions() {
   kings();
 }
 
-function pawns() {
-  ellipse(piecePositionX, piecePositionY, 50);
-  if (piecePositionX - 10 < mouseX < piecePositionX + 10 && piecePositionY - 10 < mouseY < piecePositionY + 10) {
-    if (mouseIsPressed) {
-      ellipse(mouseX,mouseY, 50);
-    }
+function eachSquare() { // have it so that each square has it's own state and value. If state is empty, have it be filled. Otherwise, have it count
+  // when it is clicked and then place the piece that was just clicked into the piece as well as the other square that just left turns empty.
+  a1();
+}
+
+function a1() {
+  inPlay === true;
+  if (mouseIsPressed && mouseX < squares && mouseY < squares && inPlay === true) {
+    pawns();
+  }
+  else {
+    inPlay = !inPlay;
   }
 }
-function kings() {
 
+function pawns() {
+  ellipse(piecePositionX, piecePositionY, 50);
+
+}
+
+function kings() {
+  rect(piecePositionX + 100, piecePositionY + 100, 60, 60);
 }
 
 function drawBoard() {
@@ -54,51 +72,3 @@ function drawBoard() {
     blackWhite = !blackWhite;
   }
 }
-
-
-
-
-
-
-
-
-
-// let state;
-// let square1;
-// let square2;
-//
-// function setup() {
-//   createCanvas(windowWidth, windowHeight);
-//   if (windowWidth > windowHeight) {
-//     square1 = windowHeight/2;
-//     square2 = windowHeight/4;
-//   }
-//   else {
-//     square1 = windowWidth/2;
-//     square2 = windowHeight/4;
-//   }
-// }
-//
-// function draw() {
-//   background(255);
-//   noFill();
-//   stroke(0);
-//   board();
-// }
-//
-// function board() {
-//   for (let b = 0; b < 2; b++) {
-//     for (let k = 0; k < 2; k++) {
-//       rect(square1 * b, square1 * k, square1, square1);
-//     }
-//   }
-//   for (let b = 0; b < 2; b++) {
-//     for (let k = 0; k < 2; k++) {
-//       rect(square2 * b, square2 * k, square1/2, square1/2);
-//     }
-//   }
-// }
-
-//Nine man morris
-//Pieces
-//Sense mouse
