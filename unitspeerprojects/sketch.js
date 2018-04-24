@@ -11,11 +11,23 @@ let columns = 54;
 let rows = 41;
 let map;
 //units! Bois
+let infantry;
 
 //creating variables for objects
 let alaska;
 let britishColumbia;
-
+let yukon;
+let northWest;
+let cascadian;
+let louisiana;
+let eastAmerica;
+let GoSL;
+let quebec;
+let mexico;
+let florida;
+let centAmeri;
+let panama;
+let cuba;
 //setup
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -25,14 +37,43 @@ function setup() {
   map = createGrid(columns, rows);
   //setting objects
   alaska = new Province("Alaska", 0, 2, 0, 2, "No One", 2, 3, 0);
-  britishColumbia = new Province("British Columbia", 1, 3, 2, 6, "England", 5, 6, 0);
-
+  britishColumbia = new Province("British Columbia", 2, 3, 0, 5, "No One", 0, 0, 0);
+  yukon = new Province("Yukon", 3, 6, 0, 5, "No One", 0, 0, 0);
+  northWest = new Province("Northwest Territories", 6, 12, 0, 5, "No One", 0, 0, 0);
+  cascadian = new Province("Cascadian", 3, 6, 5, 10, "No One", 0, 0, 0);
+  louisiana = new Province("Louisiana", 6, 10, 5, 10, "No One", 0, 0, 0);
+  eastAmerica = new Province("Eastern America", 10, 12, 5, 10, "No One", 0, 0, 0);
+  GoSL = new Province("Gulf Of St.Lawrence", 12, 14, 4, 8, "No One", 0, 0, 0);
+  quebec = new Province("Quebec", 14, 17, 1, 6, "France", 0, 0, 0);
+  mexico = new Province("Mexico", 3, 8, 10, 14, "No One", 0, 0, 0);
+  florida = new Province("Florida", 10, 12, 10, 12, "No One", 0, 0, 0);
+  centAmeri = new Province("Central America", 6, 8, 14, 17, "No One", 0, 0, 0);
+  panama = new Province("Panama", 8, 10, 16, 17, "No One", 0, 0, 0);
+  cuba = new Province("Cuba", 10, 13, 14, 15, "No One", 0, 0, 0);
 }
 
+//makes every land mass
+function makeEarthMap() {
+  alaska.display();
+  britishColumbia.display();
+  yukon.display();
+  northWest.display();
+  cascadian.display();
+  louisiana.display();
+  eastAmerica.display();
+  GoSL.display();
+  quebec.display();
+  mexico.display();
+  florida.display();
+  centAmeri.display();
+  panama.display();
+  cuba.display();
+}
 //just calls other functions
 function draw() {
   checkState();
 }
+
 
 //determines which screen the game needs to show
 function checkState() {
@@ -100,14 +141,6 @@ function backGroundThree() {
   }
 }
 
-//makes every land mass
-function makeEarthMap() {
-//  makeAlaska();
-
-  alaska.display();
-  britishColumbia.display();
-}
-
 
 class Province {
   constructor(name, xStart, xFin, yStart, yFin, ownedBy, gold, resources, isClicked) {
@@ -124,7 +157,7 @@ class Province {
 
   }
 
-  display(x, y, o) {
+  display(x, y, x1, y1, o) {
     for(let x = this.x; x < this.x1; x++) {
       for(let y = this.y; y < this.y1; y++) {
         if (countryMousedOver(this.x, this.y, this.x1, this.y1) === true) {
@@ -152,11 +185,23 @@ class Province {
         }
         //this turns off the popup
         isClicked(this.x, this.y, this.x1, this.y1, this.n, this.g, this.r, this.c, this.ownedBy);
-        if (mouseX > windowWidth / 2 - 100 && mouseX < windowWidth / 2 + 100, mouseY > windowHeight / 2 - 100 && mouseY < windowHeight / 2 + 100 && mouseIsPressed) {
+        if (mouseX > windowWidth / 2 - 100 && mouseX < windowWidth / 2 + 100 && mouseY > windowHeight / 2 - 100 && mouseY < windowHeight / 2 + 100 && mouseIsPressed) {
           this.c = 0;
+
         }
       }
     }
+  }
+}
+
+class Infantry {
+  constructor(x, y, h) {
+    this.x = x;
+    this.y = y;
+    this.health = h;
+  }
+  display() {
+
   }
 }
 
@@ -215,7 +260,7 @@ function displayGrid() {
         fill(255, 204, 0);
       }
       else if (map[x][y] === 4) {
-        fill(60, 20, 255);
+        fill(0, 0, 255);
       }
       else if (map[x][y] === 5) {
         fill(0, 255, 0);
@@ -224,7 +269,7 @@ function displayGrid() {
         fill(255);
       }
       else {
-        fill(0, 0, 255);
+        fill(0, 150, 255);
       }
       //actually makes the grid
       rect(x * blockWidth, y * blockHeight, blockWidth, blockHeight);
