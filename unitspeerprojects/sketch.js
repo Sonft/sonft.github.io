@@ -28,6 +28,29 @@ let florida;
 let centAmeri;
 let panama;
 let cuba;
+let venezuela;
+let guinea;
+let bolivia;
+let brazil;
+let peru;
+let chile;
+let laPlata;
+let england;
+let portugal;
+let spain;
+let france;
+let restOfEurope;
+let morocco;
+let algeria;
+let tunis;
+let egypt;
+let middleAfrica;
+let westCongo;
+let congo;
+let somalia;
+let mombasa;
+let southAfrica;
+let madagascar;
 //setup
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -36,38 +59,86 @@ function setup() {
   blockHeight = windowHeight / rows;
   map = createGrid(columns, rows);
   //setting objects
+  //Canadian Cores
   alaska = new Province("Alaska", 0, 2, 0, 2, "No One", 2, 3, 0);
   britishColumbia = new Province("British Columbia", 2, 3, 0, 5, "No One", 0, 0, 0);
   yukon = new Province("Yukon", 3, 6, 0, 5, "No One", 0, 0, 0);
   northWest = new Province("Northwest Territories", 6, 12, 0, 5, "No One", 0, 0, 0);
-  cascadian = new Province("Cascadian", 3, 6, 5, 10, "No One", 0, 0, 0);
-  louisiana = new Province("Louisiana", 6, 10, 5, 10, "No One", 0, 0, 0);
-  eastAmerica = new Province("Eastern America", 10, 12, 5, 10, "No One", 0, 0, 0);
   GoSL = new Province("Gulf Of St.Lawrence", 12, 14, 4, 8, "No One", 0, 0, 0);
   quebec = new Province("Quebec", 14, 17, 1, 6, "France", 0, 0, 0);
-  mexico = new Province("Mexico", 3, 8, 10, 14, "No One", 0, 0, 0);
+  //'Murica
+  cascadian = new Province("Cascadia", 3, 6, 5, 10, "No One", 0, 0, 0);
+  louisiana = new Province("Louisiana", 6, 10, 5, 10, "No One", 0, 0, 0);
+  eastAmerica = new Province("Eastern America", 10, 12, 5, 10, "No One", 0, 0, 0);
   florida = new Province("Florida", 10, 12, 10, 12, "No One", 0, 0, 0);
+  //Central America
+  mexico = new Province("Mexico", 3, 8, 10, 14, "No One", 0, 0, 0);
   centAmeri = new Province("Central America", 6, 8, 14, 17, "No One", 0, 0, 0);
   panama = new Province("Panama", 8, 10, 16, 17, "No One", 0, 0, 0);
   cuba = new Province("Cuba", 10, 13, 14, 15, "No One", 0, 0, 0);
+  //South America
+  venezuela = new Province("Venezuela", 9, 11, 17, 19, "No One", 0, 0, 0);
+  guinea = new Province("Guinea", 11, 15, 18, 19, "No One", 0, 0, 0);
+  bolivia = new Province("Bolivia", 7, 10, 19, 22, "No One", 0, 0, 0);
+  brazil = new Province("Brazil", 10, 17, 19, 26, "No One", 0, 0, 0);
+  peru = new Province("Peru", 8, 10, 22, 25, "No One", 0, 0, 0);
+  chile = new Province("Chile", 9, 10, 25, 34, "No One", 0, 0, 0);
+  laPlata = new Province("La Plata", 10, 13, 26, 32, "No One", 0, 0, 0);
+  //Western Europe
+  england = new Province("England", 20, 22, 5, 8, "England", 0, 0, 0);
+  france = new Province("France", 22, 25, 9, 11, "France", 0, 0, 0);
+  portugal = new Province("Portugal", 21, 22, 11, 13, "Portugal", 0, 0, 0);
+  spain = new Province("Spain", 22, 24, 11, 13, "Spain", 0, 0, 0);
+  //Rest of Europe
+  restOfEurope = new Province("the Rest Of Europe", 25, 32, 8, 12, "Uncolonizable Men", 0, 0, 0);
+  //North Africa
+  morocco = new Province("Morocco", 21, 23, 21, 22, "No One", 0, 0, 0);
+  algeria = new Province("Algeria", 23, 26, 21, 24, "No One", 0, 0, 0);
+  tunis = new Province("Tunis", 26, 29, 21, 24, "No One", 0, 0, 0);
+  egypt = new Province("Egypt", 29, 32, 21, 24, "No One", 0, 0, 0);
+  //Middle Africa
+
 }
 
 //makes every land mass
 function makeEarthMap() {
+  //Canadian Cores
   alaska.display();
   britishColumbia.display();
   yukon.display();
   northWest.display();
+  GoSL.display();
+  quebec.display();
+  //America
   cascadian.display();
   louisiana.display();
   eastAmerica.display();
-  GoSL.display();
-  quebec.display();
-  mexico.display();
   florida.display();
+  //Central America
+  mexico.display();
   centAmeri.display();
   panama.display();
   cuba.display();
+  //South America
+  venezuela.display();
+  guinea.display();
+  bolivia.display();
+  brazil.display();
+  peru.display();
+  chile.display();
+  laPlata.display();
+  //Europe
+  england.display();
+  france.display();
+  portugal.display();
+  spain.display();
+  //Rest of Europe
+  restOfEurope.display();
+  //North Africa
+  morocco.display();
+  algeria.display();
+  tunis.display();
+  egypt.display();
 }
 //just calls other functions
 function draw() {
@@ -178,7 +249,9 @@ class Province {
         else if (this.ownedBy === "England") {
           map[x][y] = 2;
         }
-
+        else if (this.ownedBy === "Uncolonizable Men") {
+          map[x][y] = 7;
+        }
         //if this is true, a pop up of the countries info appears
         if (clickOnCountry(this.x, this.y, this.x1, this.y1) === true) {
           this.c = 1;
@@ -209,7 +282,7 @@ class Infantry {
 function isClicked(x1, y1, x2, y2, countryName, gold, resources, isClicked, ownedBy) {
   if (isClicked === 1) {
     fill(255);
-    rect(windowWidth / 2 - 100, windowHeight / 2 - 100, 200, 200);
+    rect(windowWidth / 2 - 100, windowHeight / 2 - 100, 210, 210);
     fill(0);
     textSize(13);
     text("This is " + countryName, windowWidth / 2 - 90, windowHeight / 2 - 80);
@@ -267,6 +340,9 @@ function displayGrid() {
       }
       else if (map[x][y] === 6) {
         fill(255);
+      }
+      else if (map[x][y] === 7) {
+        fill(0);
       }
       else {
         fill(0, 150, 255);
