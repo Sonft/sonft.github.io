@@ -14,20 +14,24 @@ let map;
 let infantry;
 
 //creating variables for objects
+//Canadian Objects
 let alaska;
 let britishColumbia;
 let yukon;
 let northWest;
+let GoSL;
+let quebec;
+//American
 let cascadian;
 let louisiana;
 let eastAmerica;
-let GoSL;
-let quebec;
-let mexico;
 let florida;
+//Central America
+let mexico;
 let centAmeri;
 let panama;
 let cuba;
+//South America
 let venezuela;
 let guinea;
 let bolivia;
@@ -35,22 +39,46 @@ let brazil;
 let peru;
 let chile;
 let laPlata;
-let england;
+//Western Europe
+let greatBritain;
 let portugal;
 let spain;
 let france;
+//Rest Of Europe
 let restOfEurope;
+let italy;
+//North Africa
 let morocco;
 let algeria;
 let tunis;
 let egypt;
+//Central Africa
 let middleAfrica;
+//South/Central Africa
 let westCongo;
 let congo;
 let somalia;
 let mombasa;
 let southAfrica;
 let madagascar;
+//Middle East + India
+let iran;
+let afganistan;
+let pakistan;
+let arabia;
+let india;
+//Russia
+let russia;
+//China + IndoChina
+let mongolia;
+let tibet;
+let centralChina;
+let easternChina;
+let southChina;
+let indoChina;
+//Oceania
+let indonesia;
+let australia;
 //setup
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -72,7 +100,7 @@ function setup() {
   eastAmerica = new Province("Eastern America", 10, 12, 5, 10, "No One", 0, 0, 0);
   florida = new Province("Florida", 10, 12, 10, 12, "No One", 0, 0, 0);
   //Central America
-  mexico = new Province("Mexico", 3, 8, 10, 14, "No One", 0, 0, 0);
+  mexico = new Province("Mexico", 4, 8, 10, 14, "No One", 0, 0, 0);
   centAmeri = new Province("Central America", 6, 8, 14, 17, "No One", 0, 0, 0);
   panama = new Province("Panama", 8, 10, 16, 17, "No One", 0, 0, 0);
   cuba = new Province("Cuba", 10, 13, 14, 15, "No One", 0, 0, 0);
@@ -85,19 +113,45 @@ function setup() {
   chile = new Province("Chile", 9, 10, 25, 34, "No One", 0, 0, 0);
   laPlata = new Province("La Plata", 10, 13, 26, 32, "No One", 0, 0, 0);
   //Western Europe
-  england = new Province("England", 20, 22, 5, 8, "England", 0, 0, 0);
+  greatBritain = new Province("Great Britain", 20, 22, 5, 8, "Great Britain", 0, 0, 0);
   france = new Province("France", 22, 25, 9, 11, "France", 0, 0, 0);
   portugal = new Province("Portugal", 21, 22, 11, 13, "Portugal", 0, 0, 0);
   spain = new Province("Spain", 22, 24, 11, 13, "Spain", 0, 0, 0);
   //Rest of Europe
   restOfEurope = new Province("the Rest Of Europe", 25, 32, 8, 12, "Uncolonizable Men", 0, 0, 0);
+  italy = new Province("Italy", 27, 29, 12, 14, "Uncolonizable Men", 0, 0, 0);
   //North Africa
-  morocco = new Province("Morocco", 21, 23, 21, 22, "No One", 0, 0, 0);
-  algeria = new Province("Algeria", 23, 26, 21, 24, "No One", 0, 0, 0);
-  tunis = new Province("Tunis", 26, 29, 21, 24, "No One", 0, 0, 0);
-  egypt = new Province("Egypt", 29, 32, 21, 24, "No One", 0, 0, 0);
+  morocco = new Province("Morocco", 21, 23, 16, 22, "No One", 0, 0, 0);
+  algeria = new Province("Algeria", 23, 26, 16, 19, "No One", 0, 0, 0);
+  tunis = new Province("Tunis", 26, 29, 16, 19, "No One", 0, 0, 0);
+  egypt = new Province("Egypt", 29, 32, 16, 19, "No One", 0, 0, 0);
   //Middle Africa
-
+  middleAfrica = new Province("Central Africa", 23, 29, 19, 22, "Uncolonizable Men", 0, 0, 0);
+  //South/Central Africa
+  westCongo = new Province("West Congo", 24, 26, 22, 28, "No One", 0, 0, 0);
+  congo = new Province("Congo", 26, 29, 22, 28, "No One", 0, 0, 0);
+  somalia = new Province("Somalia", 29, 32, 19, 24, "No One", 0, 0, 0);
+  mombasa = new Province("Mombasa", 29, 30, 24, 30, "No One", 0, 0, 0);
+  southAfrica = new Province("South Africa", 25, 29, 28, 31, "No One", 0, 0, 0);
+  madagascar = new Province("Madagascar", 32, 34, 26, 29, "No One", 0, 0, 0);
+  //Middle East and India
+  iran = new Province("Iran", 32, 37, 13, 16, "No One", 0, 0, 0);
+  afganistan = new Province("Afganistan", 37, 42, 13, 16, "No One", 0, 0, 0);
+  pakistan = new Province("Pakistan", 37, 39, 16, 18, "No One", 0, 0, 0);
+  arabia = new Province("Arabia", 33, 37, 16, 21, "No One", 0, 0, 0);
+  india = new Province("India", 39, 42, 16, 22, "No One", 0, 0, 0);
+  //Russia
+  russia = new Province("Russia", 32, 54, 3, 13, "Uncolonizable Men", 0, 0, 0);
+  //China and IndoChina
+  mongolia = new Province("Mongolia", 42, 50, 13, 15, "No One", 0, 0, 0);
+  tibet = new Province("Tibet", 42, 46, 15, 18, "No One", 0, 0, 0);
+  centralChina = new Province("Central China", 46, 50, 15, 18, "No One", 0, 0, 0);
+  easternChina = new Province("Eastern China", 50, 51, 13, 19, "No One", 0, 0, 0);
+  southChina = new Province("South China", 42, 50, 18, 19, "No One", 0, 0, 0);
+  indoChina = new Province("IndoChina", 46, 49, 19, 23, "No One", 0, 0, 0);
+  //Oceania
+  indonesia = new Province("Indonesia", 47, 53, 26, 27, "No One", 0, 0, 0);
+  australia = new Province("Australia", 47, 53, 31, 36, "No One", 0, 0, 0);
 }
 
 //makes every land mass
@@ -128,17 +182,45 @@ function makeEarthMap() {
   chile.display();
   laPlata.display();
   //Europe
-  england.display();
+  greatBritain.display();
   france.display();
   portugal.display();
   spain.display();
   //Rest of Europe
   restOfEurope.display();
+  italy.display();
   //North Africa
   morocco.display();
   algeria.display();
   tunis.display();
   egypt.display();
+  //Middle Africa
+  middleAfrica.display();
+  //South/Central Africa
+  westCongo.display();
+  congo.display();
+  somalia.display();
+  mombasa.display();
+  southAfrica.display();
+  madagascar.display();
+  //Middle East and India
+  iran.display();
+  afganistan.display();
+  pakistan.display();
+  arabia.display();
+  india.display();
+  //Russia
+  russia.display();
+  //China and Indochina
+  mongolia.display();
+  tibet.display();
+  centralChina.display();
+  easternChina.display();
+  southChina.display();
+  indoChina.display();
+  //Oceania
+  indonesia.display();
+  australia.display();
 }
 //just calls other functions
 function draw() {
@@ -246,7 +328,7 @@ class Province {
         else if (this.ownedBy === "Spain") {
           map[x][y] = 3;
         }
-        else if (this.ownedBy === "England") {
+        else if (this.ownedBy === "Great Britain") {
           map[x][y] = 2;
         }
         else if (this.ownedBy === "Uncolonizable Men") {
@@ -258,7 +340,7 @@ class Province {
         }
         //this turns off the popup
         isClicked(this.x, this.y, this.x1, this.y1, this.n, this.g, this.r, this.c, this.ownedBy);
-        if (mouseX > windowWidth / 2 - 100 && mouseX < windowWidth / 2 + 100 && mouseY > windowHeight / 2 - 100 && mouseY < windowHeight / 2 + 100 && mouseIsPressed) {
+        if (keyIsPressed && (key === "c" || key === "C")) {
           this.c = 0;
 
         }
@@ -289,7 +371,7 @@ function isClicked(x1, y1, x2, y2, countryName, gold, resources, isClicked, owne
     text("It is owned by: " + ownedBy, windowWidth / 2 - 90, windowHeight / 2 - 40);
     text("It has this many resources: " + resources, windowWidth / 2 - 90, windowHeight / 2);
     text("It has this much gold: " + gold, windowWidth / 2 - 90, windowHeight / 2 + 40);
-    text("Click again to remove this page!", windowWidth / 2 - 90, windowHeight / 2 + 80);
+    text("Press C to remove this page!", windowWidth / 2 - 90, windowHeight / 2 + 80);
   }
 }
 
