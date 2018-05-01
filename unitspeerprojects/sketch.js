@@ -11,12 +11,14 @@ let blockHeight;
 let columns = 54;
 let rows = 41;
 let map;
-
+let buttonVariable = false;
+let seconds;
 //units! Bois
 let infantry;
 
 //creating variables for objects
 let masterListOfCountry = [];
+let playerCountries = [];
 //Canadian Objects
 let alaska;
 let britishColumbia;
@@ -170,6 +172,7 @@ function setup() {
   indonesia = new Province("Indonesia", 47, 53, 26, 27, "No One", 0, 0, 0);
   australia = new Province("Australia", 47, 53, 31, 36, "No One", 0, 0, 0);
 
+
   masterListOfCountry.push(
     alaska,
     britishColumbia,
@@ -197,10 +200,10 @@ function setup() {
     laPlata,
     uruguay,
     //Western Europe
-    greatBritain,
-    portugal,
-    spain,
-    france,
+    //greatBritain,
+    //portugal,
+    //spain,
+    //france,
     //Rest Of Europe
     restOfEurope,
     italy,
@@ -248,7 +251,50 @@ function setup() {
 
 //just calls other functions
 function draw() {
+  seconds = second();
+
   checkState();
+}
+//this is a function that asks the players how many will be playing!
+function askPlayerAmount() {
+  setButtonVariableToFalse();
+  background(0);
+  fill(0,255,0);
+  rect(0, 0, windowWidth/2, windowHeight / 2);//top left === 1
+  if ( mouseX <windowWidth/2 && mouseX > 0 && mouseY < windowHeight / 2 && mouseY > 0 && mouseIsPressed && buttonVariable === false) {
+    if (second() - seconds >= 1) {
+      playerCountries.push(greatBritain);
+      gameState = 2;
+      seconds = second();
+    }
+  }
+
+  fill(255,0,0);
+  rect(windowWidth/2, windowHeight/2, windowWidth, windowHeight);//botttomm right === 4
+  if ( mouseX >windowWidth/2 && mouseX < windowWidth && mouseY > windowHeight / 2 && mouseY < windowHeight && mouseIsPressed&& buttonVariable === false) {
+    playerCountries.push(greatBritain, france, spain, portugal);
+    gameState = 2;
+  }
+
+  fill(0,0,255);
+  rect(0, windowHeight/2, windowWidth/2, windowHeight);// nottam left === 3
+  if ( mouseX <windowWidth/2 && mouseX > 0 && mouseY > windowHeight / 2 && mouseY < windowHeight && mouseIsPressed&& buttonVariable === false) {
+    playerCountries.push(greatBritain, france, spain);
+    gameState = 2;
+  }
+
+  fill(0,255,70);
+  rect(windowWidth/2, 0, windowWidth, windowHeight / 2);//top right === 2
+  if ( mouseX <windowWidth && mouseX > windowWidth/2 && mouseY < windowHeight / 2 && mouseY > 0 && mouseIsPressed&& buttonVariable === false) {
+    playerCountries.push(greatBritain, france);
+    gameState = 2;
+  }
+
+}
+function setButtonVariableToFalse() {
+  if (seconds % 3 === 0) {
+    buttonVariable = false;
+  }
 }
 
 
@@ -258,9 +304,10 @@ function checkState() {
     backGroundOne();
   } else if (gameState === 2) {
     backGroundTwo();
-
   } else if (gameState === 3) {
     backGroundThree();
+  } else if (gameState === 4) {
+    askPlayerAmount();
   }
 }
 
@@ -276,7 +323,10 @@ function backGroundOne() {
 
   //sends to the game
   if (windowWidth / 2 - 100 < mouseX && mouseX < windowWidth / 2 && windowHeight / 2 - 50 < mouseY && mouseY < windowHeight / 2 + 50 && mouseIsPressed) {
-    gameState = 2;
+    if(buttonVariable === false){
+      gameState = 4;
+      buttonVariable = true;
+    }
     background(0);
   }
   //the aesthetics of the screen
@@ -344,10 +394,10 @@ function makeEarthMap() {
   laPlata.display();
   uruguay.display();
   //Europe
-  greatBritain.display();
-  france.display();
-  portugal.display();
-  spain.display();
+  //greatBritain.display();
+  //france.display();
+  //portugal.display();
+  //spain.display();
   //Rest of Europe
   restOfEurope.display();
   italy.display();
