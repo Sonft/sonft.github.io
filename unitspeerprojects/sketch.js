@@ -1,5 +1,15 @@
-//Amar Minhas 2d arrays assignment
+//Amar Minhas + Jerry Xiao Peer Programming Project
 //this project is a continuation of my previous projects
+//We both worked on the same computer so the coding was mainly uniform. We talked to each other about the solutions
+//(Jerry is better at typing so he wrote most of the code - Amar)
+//Amar wrote most of the functions and the ideas
+//Jerry wrote all of the objects and put the functions into class functions
+//Amar thought of the map and created the bedrock of the game board//you can't mine bedrock
+//Jerry did a lot of the tedious but completely necessary work.
+//Amar cleaned up the goddamn code, Jerry.
+//At least Jerry made code, Amar.
+//I was here on the ground floor Jerry, do you even love this project? are you even invested?
+//This is my child Amar. 
 
 //setting variables
 let gameState = 1;
@@ -11,8 +21,6 @@ let blockHeight;
 let columns = 54;
 let rows = 41;
 let map;
-let buttonVariable = false;
-let seconds;
 //units! Bois
 let infantry;
 
@@ -90,6 +98,18 @@ let indoChina;
 //Oceania
 let indonesia;
 let australia;
+//VARIABLES FOR THE PLAYER COUNTRY OBJECTS
+let playerGreatBritain;
+let playerFrance;
+let playerSpain;
+let playerPortugal;
+//Colonies of the player COUNTRIES
+let coloniesOfGreatBritain = [];
+let coloniesOfFrance = [];
+let coloniesOfSpain = [];
+let coloniesOfPortugal = [];
+
+
 //setup
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -172,6 +192,33 @@ function setup() {
   indonesia = new Province("Indonesia", 47, 53, 26, 27, "No One", 0, 0, 0);
   australia = new Province("Australia", 47, 53, 31, 36, "No One", 0, 0, 0);
 
+  //THIS IS US CREATING THE PLAYER COUNTRIES AS A SEPERATE OBJECT THAT WILL INTERACT WITH THE HUD
+  playerGreatBritain = new Player(
+    "Great Britain",
+    0,
+    0,
+    coloniesOfGreatBritain);
+
+  playerFrance = new Player(
+    "France",
+    0,
+    0,
+    coloniesOfFrance
+  );
+
+  playerSpain = new Player(
+    "Spain",
+    0,
+    0,
+    coloniesOfSpain
+  );
+
+  playerPortugal = new Player(
+    "Portugal",
+    0,
+    0,
+    coloniesOfPortugal
+  );
 
   masterListOfCountry.push(
     alaska,
@@ -200,10 +247,10 @@ function setup() {
     laPlata,
     uruguay,
     //Western Europe
-    //greatBritain,
-    //portugal,
-    //spain,
-    //france,
+    greatBritain,
+    portugal,
+    spain,
+    france,
     //Rest Of Europe
     restOfEurope,
     italy,
@@ -251,50 +298,8 @@ function setup() {
 
 //just calls other functions
 function draw() {
-  seconds = second();
 
   checkState();
-}
-//this is a function that asks the players how many will be playing!
-function askPlayerAmount() {
-  setButtonVariableToFalse();
-  background(0);
-  fill(0,255,0);
-  rect(0, 0, windowWidth/2, windowHeight / 2);//top left === 1
-  if ( mouseX <windowWidth/2 && mouseX > 0 && mouseY < windowHeight / 2 && mouseY > 0 && mouseIsPressed && buttonVariable === false) {
-    if (second() - seconds >= 1) {
-      playerCountries.push(greatBritain);
-      gameState = 2;
-      seconds = second();
-    }
-  }
-
-  fill(255,0,0);
-  rect(windowWidth/2, windowHeight/2, windowWidth, windowHeight);//botttomm right === 4
-  if ( mouseX >windowWidth/2 && mouseX < windowWidth && mouseY > windowHeight / 2 && mouseY < windowHeight && mouseIsPressed&& buttonVariable === false) {
-    playerCountries.push(greatBritain, france, spain, portugal);
-    gameState = 2;
-  }
-
-  fill(0,0,255);
-  rect(0, windowHeight/2, windowWidth/2, windowHeight);// nottam left === 3
-  if ( mouseX <windowWidth/2 && mouseX > 0 && mouseY > windowHeight / 2 && mouseY < windowHeight && mouseIsPressed&& buttonVariable === false) {
-    playerCountries.push(greatBritain, france, spain);
-    gameState = 2;
-  }
-
-  fill(0,255,70);
-  rect(windowWidth/2, 0, windowWidth, windowHeight / 2);//top right === 2
-  if ( mouseX <windowWidth && mouseX > windowWidth/2 && mouseY < windowHeight / 2 && mouseY > 0 && mouseIsPressed&& buttonVariable === false) {
-    playerCountries.push(greatBritain, france);
-    gameState = 2;
-  }
-
-}
-function setButtonVariableToFalse() {
-  if (seconds % 3 === 0) {
-    buttonVariable = false;
-  }
 }
 
 
@@ -302,11 +307,14 @@ function setButtonVariableToFalse() {
 function checkState() {
   if (gameState === 1) {
     backGroundOne();
-  } else if (gameState === 2) {
+  }
+  else if (gameState === 2) {
     backGroundTwo();
-  } else if (gameState === 3) {
+  }
+  else if (gameState === 3) {
     backGroundThree();
-  } else if (gameState === 4) {
+  }
+  else if (gameState === 4) {
     askPlayerAmount();
   }
 }
@@ -323,10 +331,7 @@ function backGroundOne() {
 
   //sends to the game
   if (windowWidth / 2 - 100 < mouseX && mouseX < windowWidth / 2 && windowHeight / 2 - 50 < mouseY && mouseY < windowHeight / 2 + 50 && mouseIsPressed) {
-    if(buttonVariable === false){
-      gameState = 4;
-      buttonVariable = true;
-    }
+    gameState = 4;
     background(0);
   }
   //the aesthetics of the screen
@@ -365,6 +370,41 @@ function backGroundThree() {
     gameState = 1;
   }
 }
+//this is a function that asks the players how many will be playing!
+function askPlayerAmount() {
+  background(0);
+  fill(0,255,0);
+
+  rect(0, 0, windowWidth/2, windowHeight / 2);//top left === 1
+  if ( keyIsPressed && key === "1") {
+    playerCountries.push(greatBritain);
+    gameState = 2;
+
+  }
+
+  fill(255,0,0);
+  rect(windowWidth/2, windowHeight/2, windowWidth, windowHeight);//botttomm right === 4
+  if (keyIsPressed && key === "4") {
+    playerCountries.push(greatBritain, france, spain, portugal);
+    gameState = 2;
+  }
+
+  fill(0,0,255);
+  rect(0, windowHeight/2, windowWidth/2, windowHeight);// nottam left === 3
+  if (keyIsPressed && key === "3") {
+    playerCountries.push(greatBritain, france, spain);
+    gameState = 2;
+  }
+
+  fill(0,255,70);
+  rect(windowWidth/2, 0, windowWidth, windowHeight / 2);//top right === 2
+  if (keyIsPressed && key === "2") {
+    playerCountries.push(greatBritain, france);
+    gameState = 2;
+  }
+
+}
+
 //Makes every land mass
 function makeEarthMap() {
   //Canadian Cores
@@ -394,10 +434,10 @@ function makeEarthMap() {
   laPlata.display();
   uruguay.display();
   //Europe
-  //greatBritain.display();
-  //france.display();
-  //portugal.display();
-  //spain.display();
+  greatBritain.display();
+  france.display();
+  portugal.display();
+  spain.display();
   //Rest of Europe
   restOfEurope.display();
   italy.display();
@@ -444,6 +484,7 @@ function makeEarthMap() {
 function headsUpDisplay(playerCountry, colour, resources, gold) {
   fill(255);
   rect(0, windowHeight - 3 * blockHeight, windowWidth, windowHeight);
+  //text label = gold, then resources, then player country
 }
 
 
@@ -497,11 +538,10 @@ class PlayerHUDInfo {
 }
 //THIS IS THE INFO FOR EVERY COUNTRY: HUD USES THIS, THE GAME WILL CHANGE THIS DEPENDING ON WHAT HAPPENS IN TURNS (IE. events, turn transitions,etc)
 class Player {
-  constructor(colonies, ownedBy, gold, resources) {
+  constructor(ownedBy, gold, resources, colonies) {
     this.o = ownedBy;
     this.g = gold;
     this.r = resources;
-    colonies= [];
     this.c = colonies;
   }
   determineColonies(colonies) {
